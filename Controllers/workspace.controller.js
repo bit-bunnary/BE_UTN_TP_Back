@@ -11,10 +11,24 @@ class WorkspaceController {
             data: {
                 workspaces
             }
+        })
+    }
+
+    async create(request, response){
+        console.log("USER:", request.user)
+        const {title, image, description} = request.body
+        const user_id = request.user.id
+        const workspace = await workspaceRepository.create(user_id, title, image, description)
+        await workspaceRepository.addMember(workspace._id, user_id, 'Owner')
+        response.json({
+            ok: true,
+            data: {
+                workspace
             }
-        )
+        })
     }
 }
+
 
 const workspaceController = new WorkspaceController()
 
