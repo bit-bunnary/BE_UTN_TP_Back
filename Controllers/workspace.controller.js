@@ -35,10 +35,15 @@ class WorkspaceController {
             const user_id = request.user.id
             const { workspace_id } = request.params
 
+            const workspace_selected = await workspaceRepository.getById(workspace_id)
+            if(!workspace_selected){
+                throw new ServerError('No existe ese espacio de trabajo', 404)
+            }
+
             const member_info = await workspaceRepository.getMemberByWorkspaceIdAndUserId(workspace_id, user_id)
             /* si el rol es distinto de 'Owner */
             if (member_info.role !== 'Owner') {
-                throw new ServerError('No tienes permiso para eliminar este espacio de trabajo', 403);
+                throw new ServerError('No tienes permiso para eliminar este espacio de trabajo', 403)
             }
             await workspaceRepository.delete(workspace_id)
             response.json({
