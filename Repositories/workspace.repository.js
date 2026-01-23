@@ -10,9 +10,12 @@ class WorkspaceRepository {
 
     async getWorkspacesByUserId (user_id){
         const workspaces = await MemberWorkspace.find({fk_id_user: user_id})
-        .populate('fk_id_workspace')/* esto permite expandir sobre la referencia a Workspace */
+        .populate({
+            path: 'fk_id_workspace',
+            match: {active: true}
+        })/* esto permite expandir sobre la referencia a Workspace */
         
-        return workspaces
+        return workspaces.filter((member) => member.fk_id_workspace !== null)
     }
     async create (fk_id_owner, title, image, description){
         const workspace = await Workspace.create({
