@@ -2,14 +2,14 @@ import mongoose from "mongoose";
 
 const memberWorkspaceSchema = new mongoose.Schema(
     {
-        fk_id_owner: {
+        fk_id_user: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
+            ref: 'User',
             required: true
         },
         fk_id_workspace: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "WorkSpace",
+            ref: 'Workspace',
             required: true
         },
         created_at: {
@@ -18,8 +18,8 @@ const memberWorkspaceSchema = new mongoose.Schema(
         },
         role: {
             type: String,
-            enum: ["Owner", "Admin", "User"],
-            default: "User",
+            enum: ['Owner', 'Admin', 'User'],
+            default: 'User',
             required: true
         }
     }
