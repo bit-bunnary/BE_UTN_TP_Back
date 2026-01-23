@@ -2,6 +2,7 @@ import { connectMongoDB } from "./Config/mongoDB.config.js"
 import express from 'express'
 import authRouter from "./Routes/auth.router.js"
 import cors from 'cors'
+import workspaceRouter from "./Routes/workspace.router.js"
 
 connectMongoDB()
 
@@ -29,6 +30,7 @@ app.use(express.json())
 
 
 app.use('/api/auth', authRouter)
+app.use("/api/workspace", workspaceRouter)
 
 app.listen(
     8180,
