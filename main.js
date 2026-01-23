@@ -1,9 +1,6 @@
 import { connectMongoDB } from "./Config/mongoDB.config.js"
 import express from 'express'
-import testRouter from "./Routes/test.router.js"
 import authRouter from "./Routes/auth.router.js"
-import mailTransporter from "./Config/mail.config.js"
-import ENVIRONMENT from "./Config/environment.config.js"
 import cors from 'cors'
 
 connectMongoDB()
@@ -30,8 +27,6 @@ app.use(express.json())
     }
 ) */
 
-
-app.use('/api/test', testRouter)
 
 app.use('/api/auth', authRouter)
 
