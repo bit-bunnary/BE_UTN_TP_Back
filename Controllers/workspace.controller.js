@@ -1,3 +1,4 @@
+import ServerError from "../Helpers/error.helpers.js"
 import workspaceRepository from "../Repositories/workspace.repository.js"
 
 class WorkspaceController {
@@ -26,6 +27,45 @@ class WorkspaceController {
                 workspace
             }
         })
+    }
+
+    /* sólo el owner va a poder eliminar el workspace */
+    async delete(request, response) {
+        try {
+            const user_id = request.user.id
+            const { workspace_id } = request.params
+
+            const member_info = await workspaceRepository.getMemberByWorkspaceIdAndUserId(workspace_id, user_id)
+            /* si el rol es distinto de 'Owner */
+            if (member_info.role !== 'Owner') {
+                throw new ServerError('No tienes permiso para eliminar este espacio de trabajo', 403);
+            }
+            await workspaceRepository.delete(workspace_id)
+            response.json({
+                ok: true,
+                message: 'Espacio de trabajo eliminado correctamente',
+                status: 200,
+                data: null
+            })
+        }
+
+        catch (error) {
+            if (error.status) {
+                return response.json({
+                    message: error.message,
+                    ok: false,
+                    status: error.status,
+                    data: null
+                })
+            }
+            return response.json({
+                message: 'Error interno del servidor',
+                ok: false,
+                status: 500,
+                data: null
+            })
+        }
+
     }
 }
 

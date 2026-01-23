@@ -27,6 +27,15 @@ class WorkspaceRepository {
         return member
     }
 
+    /* obtenemos miembro de workspace por el ID del espacio de trabajo y de usuario */
+    async getMemberByWorkspaceIdAndUserId(workspace_id){
+        const member = await MemberWorkspace.findOne({fk_id_workspace: workspace_id, fk_id_user: user_id})
+        return member
+    }
+
+    async  delete(workspace_id){
+        MemberWorkspace.findByIdAndUpdate(workspace_id, {active: false})
+    }
 }
 
 const workspaceRepository = new WorkspaceRepository()
