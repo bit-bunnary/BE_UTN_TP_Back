@@ -89,8 +89,7 @@ class WorkspaceController {
 
             const already_member = await workspaceRepository.getMemberByWorkspaceIdAndUserId(workspace._id, user_to_invite._id)
 
-            /* FIXME: */
-            console.log("ALREADY MEMBER:", already_member)
+
 
             if(already_member){
                 throw new ServerError("El usuario ya es miembro de este espacio de trabajo", 400)
