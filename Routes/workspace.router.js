@@ -9,7 +9,7 @@ workspaceRouter.get('/', authMiddleware, workspaceController.getWorkspaces)
 workspaceRouter.post('/', authMiddleware, workspaceController.create)
 
 workspaceRouter.get('/:workspace_id', authMiddleware, workspaceMiddleware(), workspaceController.getById)
-workspaceRouter.get('/:workspace_id/channels', authMiddleware, workspaceMiddleware(), workspaceController.gerChannels)
+workspaceRouter.get('/:workspace_id/channels', authMiddleware, workspaceMiddleware(), workspaceController.getChannels)
 
 workspaceRouter.delete('/:workspace_id', authMiddleware, workspaceController.delete)
 workspaceRouter.post('/:workspace_id/members', authMiddleware, workspaceMiddleware(['owner', 'admin']), workspaceController.addMemberRequest)
