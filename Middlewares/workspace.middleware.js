@@ -20,8 +20,8 @@ function workspaceMiddleware(authorized_roles = []) {
                 throw new ServerError('No perteneces a este espacio de trabajo', 403)
             }
 
-            /* chequear el rol y gestiona el acceso por rol */ /* desp del && debería poner un "!"? */
-            if (authorized_roles.length > 0 && authorized_roles.includes(member_selected.role)) {
+            /* chequear el rol y gestiona el acceso por rol */ /* FIXME:? puse un "!"? */
+            if (authorized_roles.length > 0 && !authorized_roles.includes(member_selected.role)) {
                 throw new ServerError("No estas autorizado para hacer esta operación", 403);
             }
 

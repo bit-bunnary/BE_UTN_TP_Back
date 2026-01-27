@@ -174,6 +174,38 @@ class WorkspaceController {
             })
         }
     }
+
+    async getById (request, response){
+        try {
+            const {workspace, member} = request
+            response.json({
+                message: 'Espacio de trabajo seleccionado',
+                ok: true,
+                status: 200,
+                data: {
+                    workspace,
+                    member
+                }
+            })
+        }
+        
+        catch (error) {
+            if (error.status) {
+                return response.json({
+                    message: error.message,
+                    ok: false,
+                    status: error.status,
+                    data: null
+                })
+            }
+            return response.json({
+                message: 'Error interno del servidor',
+                ok: false,
+                status: 500,
+                data: null
+            })
+        }
+    }
 }
 
 
