@@ -1,5 +1,10 @@
+import Mail from "nodemailer/lib/mailer/index.js"
+import ENVIRONMENT from "../Config/environment.config.js"
 import ServerError from "../Helpers/error.helpers.js"
+import userRepository from "../Repositories/user.repository.js"
 import workspaceRepository from "../Repositories/workspace.repository.js"
+import jwt from 'jsonwebtoken'
+import mailTransporter from "../Config/mail.config.js"
 
 class WorkspaceController {
     async getWorkspaces(request, response) {
@@ -70,7 +75,105 @@ class WorkspaceController {
                 data: null
             })
         }
+    }
 
+    async addMemberRequest(request, response){
+        try {
+            const {email, role} = request.body
+            const workspace = request.workspace
+            const user_to_invite = await userRepository.buscarUnoPorEmail(email)
+            if(!user_to_invite){
+                throw new ServerError("El email del invitado no existe", 404);
+                
+            }
+
+            const already_member = await workspaceRepository.getMemberByWorkspaceIdAndUserId(workspace._id, user_to_invite._id)
+
+            /* FIXME: */
+            console.log("ALREADY MEMBER:", already_member)
+
+            if(already_member){
+                throw new ServerError("El usuario ya es miembro de este espacio de trabajo", 400)
+            }
+
+            const token = jwt.sign(
+                {
+                    id: user_to_invite._id,
+                    email,
+                    workspace: workspace._id,
+                    role
+                },
+                ENVIRONMENT.JWT_SECRET_KEY
+            )
+
+            mailTransporter.sendMail(
+                {
+                    to: email,
+                    from: ENVIRONMENT.GMAIL_USER,
+                    subject: `Invitación a ${workspace.title}`,
+                    html: `
+                        <h1>Has sido invitado a participar del espacio de trabajo: ${workspace.title} </h1>
+                        <p>Si no reconoces esta invitación, desestima este mail</p>
+                        <p>Haz click en aceptar invitación para unirte al espacio de trabajo</p>
+                        <a href='${ENVIRONMENT.URL_BACKEND}/api/workspace/${workspace._id}/members/accept-invitation?invitation_token=${token}'>Aceptar Invitación</a>
+                    `
+                }
+            )
+            return response.json(
+                {
+                    message: 'Invitación enviada',
+                    status: 201,
+                    ok: true,
+                    data: null
+                }
+            )
+        }
+        
+        catch (error) {
+            if (error.status) {
+                return response.json({
+                    message: error.message,
+                    ok: false,
+                    status: error.status,
+                    data: null
+                })
+            }
+            return response.json({
+                message: 'Error interno del servidor',
+                ok: false,
+                status: 500,
+                data: null
+            })
+        }
+    }
+    async acceptInvitation (request, response){
+        try {
+            const {invitation_token} = request.query
+            const payload = jwt.verify(invitation_token, ENVIRONMENT.JWT_SECRET_KEY)
+            const {id, workspace: workspace_id, role} = payload
+            await workspaceRepository.addMember(workspace_id, id, role)
+
+            response.redirect(`${ENVIRONMENT.URL_FRONTEND}/`)
+        }
+        
+        catch (error) {
+            /* console.log({error}) */
+
+            if (error.status) {
+                return response.json({
+                    message: error.message,
+                    ok: false,
+                    status: error.status,
+                    data: null
+                })
+            }
+            return response.json({
+                message: 'Error interno del servidor',
+                ok: false,
+                status: 500,
+                data: null
+            })
+        }
     }
 }
 
