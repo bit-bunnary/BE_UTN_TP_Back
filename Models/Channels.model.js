@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const channelsSchema = mongoose.Schema(
+const channelsSchema = new mongoose.Schema(
     {
         fk_id_workspace: {
             type: mongoose.Schema.Types.ObjectId,
