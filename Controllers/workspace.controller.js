@@ -208,7 +208,7 @@ class WorkspaceController {
         }
     }
 
-    /* FIXME: */
+    /* FIXME: me servirá esto para un futuro? */
     /* async getChannels (request, response){
         try {
             const {workspace} = request
