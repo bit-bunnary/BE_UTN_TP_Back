@@ -16,7 +16,9 @@ workspaceRouter.post('/:workspace_id/channels', authMiddleware, workspaceMiddlew
 workspaceRouter.get('/:workspace_id/channels', authMiddleware, workspaceMiddleware(), channelController.getAllByWorkspaceId)
 
 /* 29.01.26 */
-workspaceRouter.get('/:workspace_id/channels/:channel_id/messages', authMiddleware, workspaceMiddleware(), channelMiddleware, messagesController.create)
+workspaceRouter.post('/:workspace_id/channels/:channel_id/messages', authMiddleware, workspaceMiddleware(), channelMiddleware, messagesController.create)
+workspaceRouter.get('/:workspace_id/channels/:channel_id/messages', authMiddleware, workspaceMiddleware(), channelMiddleware, messagesController.getByChannelId)
+
 
 workspaceRouter.delete('/:workspace_id', authMiddleware, workspaceController.delete)
 workspaceRouter.post('/:workspace_id/members', authMiddleware, workspaceMiddleware(['Owner', 'Admin']), workspaceController.addMemberRequest)

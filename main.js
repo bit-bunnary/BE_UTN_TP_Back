@@ -4,6 +4,7 @@ import authRouter from "./Routes/auth.router.js"
 import cors from 'cors'
 import workspaceRouter from "./Routes/workspace.router.js"
 import workspaceRepository from "./Repositories/workspace.repository.js"
+import messagesRepository from "./Repositories/messages.repository.js"
 
 connectMongoDB()
 
@@ -62,3 +63,5 @@ app.listen(
 }
 
 crearEspacioDeTrabajo() */
+
+/* messagesRepository.getAllByChannelId('697a5ab14d03ffb2fefc10fe').then(result => console.log(JSON.stringify(result))) */

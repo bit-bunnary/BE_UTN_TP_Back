@@ -1,3 +1,4 @@
+import { populate } from "dotenv";
 import ChannelMessages from "../Models/ChannelMessages.model.js";
 
 class MessagesRepository{
@@ -7,7 +8,20 @@ class MessagesRepository{
             message: content,
             fk_workspace_channel_id: channel_id
         })
-    } 
+    }
+    async getAllByChannelId(channel_id){
+        const messages = await ChannelMessages.find({fk_workspace_channel_id: channel_id})
+            .populate({
+                path: 'fk_workspace_member_id',
+                select: 'role fk_id_user',
+                populate: {
+                    path: 'fk_id_user',
+                    select: 'username email'
+                }
+            })
+        return messages
+    }
+
 }
 
 const messagesRepository = new MessagesRepository()
