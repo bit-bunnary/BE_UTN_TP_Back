@@ -22,6 +22,14 @@ class MessagesRepository{
         return messages
     }
 
+    /* extra */
+    async getById(message_id) {
+        return ChannelMessages.findById(message_id)
+    }
+
+    async deleteById(message_id) {
+        return ChannelMessages.findByIdAndDelete(message_id)
+    }
 }
 
 const messagesRepository = new MessagesRepository()
