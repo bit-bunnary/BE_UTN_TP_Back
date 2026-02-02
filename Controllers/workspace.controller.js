@@ -207,42 +207,6 @@ class WorkspaceController {
             })
         }
     }
-
-    /* FIXME: me servirá esto para un futuro? */
-    /* async getChannels (request, response){
-        try {
-            const {workspace} = request
-
-            const channels = await channelRepository.getByWorkspaceId(
-                workspace._id
-            )
-
-            return response.json({
-            ok: true,
-            status: 200,
-            data: {
-                workspace_id: workspace._id,
-                channels
-            }
-        }
-        
-        catch (error) {
-            if (error.status) {
-                return response.json({
-                    message: error.message,
-                    ok: false,
-                    status: error.status,
-                    data: null
-                })
-            }
-            return response.json({
-                message: 'Error interno del servidor',
-                ok: false,
-                status: 500,
-                data: null
-            })
-        }
-    } */
 }
 
 
