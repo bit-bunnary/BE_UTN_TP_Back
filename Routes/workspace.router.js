@@ -28,4 +28,5 @@ workspaceRouter.get('/:workspace_id/members/accept-invitation', workspaceControl
 
 workspaceRouter.delete('/:workspace_id/channels/:channel_id/messages/:message_id', authMiddleware, workspaceMiddleware(), channelMiddleware, messagesController.delete)
 
+
 export default workspaceRouter
