@@ -46,22 +46,22 @@ Tener instalado:
 
 ⊹₊ ˚‧︵‿₊୨୧₊‿︵‧ ˚ ₊⊹
 
-## 📝 Requests Postman
+## 🛠️ Uso Requests en Postman
 
 - Registrarse 👤 ➜ **POST** (/api/auth/register)
-    {
+    `{
         "username": "UserEjemplo123",
         "email": "ejemplo.ejemplito@mail.com",
         "password": "123456"
-    }
+    }`
 
 ---
 
 - Iniciar Sesión 🗝️ ➜ **POST** (/api/auth/login)
-    {
+    `{
         "email": "ejemplo.ejemplito@mail.com",
         "password": "123456"
-    }
+    }`
 
 ---
 
