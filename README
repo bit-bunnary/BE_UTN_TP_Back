@@ -1,0 +1,99 @@
+# 🐰 Mini Descripción﹏﹏✏️
+
+Backend del proyecto semejante a un **Slack** desarrollado en JavaScript.
+
+Este servidor tiene una API REST que permite la gestión de usuarios, canales, mensajes y autenticación básica para como un clon del, ya mencionado, Slack.
+Este proyecto permite:
+- Registro y autenticación de usuarios.
+- Creación y gestión de canales.
+- Envío y recepción de mensajes dentro de los canales, así como también la eliminación de dicho mensaje.
+- Manejo básico de roles y permisos.
+
+⊹₊ ˚‧︵‿₊୨୧₊‿︵‧ ˚ ₊⊹
+
+## 📁 Estructura del proyecto
+
+El proyecto tiene las siguientes carpetas:
+- `Controllers`: lógica de cada recurso.
+- `Routes`: definición de las rutas de la API.
+- `Models`: estructuras de datos y esquemas.
+- `Middlewares`: funciones intermedias (autenticación, validaciones).
+- `Helpers`, `Repositories` y `Config`: utilidades y configuraciones.
+
+⊹₊ ˚‧︵‿₊୨୧₊‿︵‧ ˚ ₊⊹
+
+## 🧩 Requisitos Previos
+
+Tener instalado:
+
+- **Node.js** (>= v14)
+
+⊹₊ ˚‧︵‿₊୨୧₊‿︵‧ ˚ ₊⊹
+
+## ⚙️ Instalación
+
+1. Clonar el repo
+
+2. Instalar las dependencias
+    📦 _Dependencias principales_:
+        - express (servidor web)
+        - jsonwebtoken (auth JWT)
+        - dotenv (variables de entorno)
+        - nodemon (desarrollo)
+
+3. Configurar las variables de entorno (renombrar el `.env.example` a `.env`)
+
+4. Correr el servidor
+
+⊹₊ ˚‧︵‿₊୨୧₊‿︵‧ ˚ ₊⊹
+
+## 📝 Requests Postman
+
+- Registrarse 👤 ➜ **POST** (/api/auth/register)
+    {
+        "username": "UserEjemplo123",
+        "email": "ejemplo.ejemplito@mail.com",
+        "password": "123456"
+    }
+
+---
+
+- Iniciar Sesión 🗝️ ➜ **POST** (/api/auth/login)
+    {
+        "email": "ejemplo.ejemplito@mail.com",
+        "password": "123456"
+    }
+
+---
+
+- Crear Workspace ┳━┳🪑 ➜ **POST** (/api/workspace/)
+    {
+        "title": "Test Workspace",
+        "image": "image.png",
+        "description": "Este es un espacio de trabajo de prueba"
+    }
+
+---
+
+- Crear Canal 📬 ➜ **POST** (/api/workspace/:workspace_id/channels)
+    {
+        "name": "Canal Bonito"
+    }
+
+⚠️ Importante tener en "Authorization" el Bearer Token ⚠️
+
+---
+
+- Crear Mensajito 💬 ➜ **POST** (/api/workspace/:workspace_id/channels/:channel_id/messages)
+    {
+        "content": "Buenos días estrellitas, la Tierra les dice hola!"
+    }
+
+⚠️ Importante tener en "Authorization" el Bearer Token ⚠️
+
+⊹₊ ˚‧︵‿₊୨୧₊‿︵‧ ˚ ₊⊹
+
+## Muchas gracias por leer! (✿◡‿◡) 🌸˚˖⋆
+
+
+
