@@ -49,6 +49,7 @@ Tener instalado:
 ## 🛠️ Uso Requests en Postman
 
 - Registrarse 👤 ➜ **POST** (/api/auth/register)
+
     `{
         "username": "UserEjemplo123",
         "email": "ejemplo.ejemplito@mail.com",
@@ -58,6 +59,7 @@ Tener instalado:
 ---
 
 - Iniciar Sesión 🗝️ ➜ **POST** (/api/auth/login)
+
     `{
         "email": "ejemplo.ejemplito@mail.com",
         "password": "123456"
@@ -66,27 +68,30 @@ Tener instalado:
 ---
 
 - Crear Workspace ┳━┳🪑 ➜ **POST** (/api/workspace/)
-    {
+
+    `{
         "title": "Test Workspace",
         "image": "image.png",
         "description": "Este es un espacio de trabajo de prueba"
-    }
+    }`
 
 ---
 
 - Crear Canal 📬 ➜ **POST** (/api/workspace/:workspace_id/channels)
-    {
+
+    `{
         "name": "Canal Bonito"
-    }
+    }`
 
 ⚠️ Importante tener en "Authorization" el Bearer Token ⚠️
 
 ---
 
 - Crear Mensajito 💬 ➜ **POST** (/api/workspace/:workspace_id/channels/:channel_id/messages)
-    {
+
+    `{
         "content": "Buenos días estrellitas, la Tierra les dice hola!"
-    }
+    }`
 
 ⚠️ Importante tener en "Authorization" el Bearer Token ⚠️
 
