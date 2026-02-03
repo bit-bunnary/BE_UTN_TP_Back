@@ -1,4 +1,4 @@
-# 🐰 Mini Descripción﹏﹏✏️
+# 🐰 Backend: Clon de Slack﹏﹏✏️
 
 Backend del proyecto semejante a un **Slack** desarrollado en JavaScript.
 
@@ -39,7 +39,6 @@ Tener instalado:
         - express (servidor web)
         - jsonwebtoken (auth JWT)
         - dotenv (variables de entorno)
-        - nodemon (desarrollo)
 
 3. Configurar las variables de entorno (renombrar el `.env.example` a `.env`)
 
@@ -93,7 +92,4 @@ Tener instalado:
 
 ⊹₊ ˚‧︵‿₊୨୧₊‿︵‧ ˚ ₊⊹
 
-## Muchas gracias por leer! (✿◡‿◡) 🌸˚˖⋆
-
-
-
+Muchas gracias por leer! (✿◡‿◡) 🌸˚˖⋆
