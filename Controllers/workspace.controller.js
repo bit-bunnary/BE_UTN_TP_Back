@@ -22,17 +22,37 @@ class WorkspaceController {
     }
 
     async create(request, response){
-        console.log("USER:", request.user)
-        const {title, image, description} = request.body
-        const user_id = request.user.id
-        const workspace = await workspaceRepository.create(user_id, title, image, description)
-        await workspaceRepository.addMember(workspace._id, user_id, 'Owner')
-        response.json({
-            ok: true,
-            data: {
-                workspace
+        try {
+            console.log("USER:", request.user)
+            const { title, /* image ,*/ description } = request.body
+            const user_id = request.user.id
+            const workspace = await workspaceRepository.create(user_id, title, null, description)
+            await workspaceRepository.addMember(workspace._id, user_id, 'Owner')
+            response.json({
+                ok: true,
+                data: {
+                    workspace
+                }
+            })
+        }
+        
+        catch (error) {
+            if (error.status) {
+                return response.json({
+                    message: error.message,
+                    ok: false,
+                    status: error.status,
+                    data: null
+                })
             }
-        })
+            return response.json({
+                message: 'Error interno del servidor',
+                ok: false,
+                status: 500,
+                data: null
+            })
+        }
+        
     }
 
     /* sólo el owner va a poder eliminar el workspace */
