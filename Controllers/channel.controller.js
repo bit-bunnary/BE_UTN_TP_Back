@@ -3,17 +3,28 @@ import channelRepository from "../Repositories/channel.repository.js"
 class ChannelController {
     async getAllByWorkspaceId(request, response){
         try {
-            const {workspace_id} = request.params
+            const { workspace_id } = request.params
             const channels = await channelRepository.getAllByWorkspaceId(workspace_id)
-            response.json({
-                message: 'Canales obtenidos exitosamente',
-                ok: true,
-                status: 200,
-                data: {
-                    channels
-                }
-            })
+            if (channels.length === 0) {
+                response.json({
+                    message: 'No hay canales',
+                    ok: false,
+                    status: 204,
+                    data: null
+                })
+            }
+            else {
+                response.json({
+                    message: 'Canales obtenidos exitosamente',
+                    ok: true,
+                    status: 200,
+                    data: {
+                        channels
+                    }
+                })
+            }
         }
+        
         
         catch (error) {
             if (error.status) {
