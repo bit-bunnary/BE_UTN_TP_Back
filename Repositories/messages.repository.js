@@ -10,7 +10,8 @@ class MessagesRepository{
         })
     }
     async getAllByChannelId(channel_id){
-        const messages = await ChannelMessages.find({fk_workspace_channel_id: channel_id})
+        /* traigo todos los msj con populate */
+        const allMessages = await ChannelMessages.find({fk_workspace_channel_id: channel_id})
             .populate({
                 path: 'fk_workspace_member_id',
                 select: 'role fk_id_user',
@@ -18,7 +19,12 @@ class MessagesRepository{
                     path: 'fk_id_user',
                     select: 'username email'
                 }
-            })
+            });
+
+        const messages = allMessages.filter(msg => 
+            msg.fk_workspace_member_id !== null && 
+            msg.fk_workspace_member_id.fk_id_user !== null
+        );
         return messages
     }
 

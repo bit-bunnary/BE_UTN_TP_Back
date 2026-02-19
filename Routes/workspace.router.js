@@ -17,6 +17,7 @@ workspaceRouter.get('/:workspace_id/channels', authMiddleware, workspaceMiddlewa
 
 /* 29.01.26 */
 workspaceRouter.post('/:workspace_id/channels/:channel_id/messages', authMiddleware, workspaceMiddleware(), channelMiddleware, messagesController.create)
+
 workspaceRouter.get('/:workspace_id/channels/:channel_id/messages', authMiddleware, workspaceMiddleware(), channelMiddleware, messagesController.getByChannelId)
 
 
