@@ -7,13 +7,15 @@ class MessagesController {
         try {
             const {content} = request.body
             const member_id = request.member._id
+            const user = request.user
             const {channel_id} = request.params
-            await messagesRepository.create(member_id, content, channel_id)
+            const messageCreated = await messagesRepository.create(member_id, content, channel_id)
 
             return response.json({
                 message: 'Mensaje creado exitosamente',
                 ok: true,
-                status: 201
+                status: 201,
+                data: {message: messageCreated, user: user}
             })
 
 
