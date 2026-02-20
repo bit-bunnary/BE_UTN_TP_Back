@@ -21,6 +21,11 @@ const channelsSchema = new mongoose.Schema(
         },
     }
 )
+/* Evita canales duplicados en MONGO */
+channelsSchema.index(
+    { fk_id_workspace: 1, name: 1 },
+    { unique: true }
+)
 
 const Channel = mongoose.model('Channel', channelsSchema)
 export default Channel

@@ -2,7 +2,19 @@ import Channel from "../Models/Channels.model.js"
 
 class ChannelRepository {
     async create(workspace_id, name) {
-        return await Channel.create({name: name, fk_id_workspace: workspace_id})
+        const existingChannel = await Channel.findOne({
+            fk_id_workspace: workspace_id,
+            name: name
+        }) 
+
+        if(existingChannel){
+            throw new Error("Ya existe un canal con ese nombre en el Workspace")
+        }
+
+        return await Channel.create({
+            name: name,
+            fk_id_workspace: workspace_id
+        })
     }
 
     async getAllByWorkspaceId(workspace_id){

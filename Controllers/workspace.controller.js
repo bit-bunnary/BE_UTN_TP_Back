@@ -27,11 +27,22 @@ class WorkspaceController {
             const { title, /* image ,*/ description } = request.body
             const user_id = request.user.id
             const workspace = await workspaceRepository.create(user_id, title, null, description)
+            
+            /* Agrega al owner */
             await workspaceRepository.addMember(workspace._id, user_id, 'Owner')
+
+
+            /* Crear canal por default  */
+            const defaultChannel = await channelRepository.create(
+                workspace._id,
+                'General'
+            )
+
             response.json({
                 ok: true,
                 data: {
-                    workspace
+                    workspace,
+                    defaultChannel
                 }
             })
         }
