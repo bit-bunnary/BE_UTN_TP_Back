@@ -68,7 +68,7 @@ class MessagesController {
         }
     }
 
-    /* extra */
+    /* Eliminación de mensaje */
     async delete (request, response){
         try {
             const {message_id} = request.params

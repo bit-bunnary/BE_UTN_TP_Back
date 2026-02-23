@@ -9,7 +9,8 @@ const channelsSchema = new mongoose.Schema(
         },
         name: {
             type: String,
-            required: true
+            required: [true , "El nombre del canal es obligatorio"],
+            maxlength: [20, "El nombre del canal no puede exceder los 20 caracteres"]
         },
         created_at: {
             type: Date,
