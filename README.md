@@ -1,4 +1,6 @@
-# 🐰 Backend: Clon de Slack﹏﹏✏️
+# ︵‿₊⊱🌸 BloomTalk 🌸⊰₊‿︵
+
+## 🐰 Backend: Clon de Slack﹏﹏✏️
 
 Backend del proyecto semejante a un **Slack** desarrollado en JavaScript.
 
@@ -43,6 +45,28 @@ Tener instalado:
 3. Configurar las variables de entorno (renombrar el `.env.example` a `.env`)
 
 4. Correr el servidor
+
+⊹₊ ˚‧︵‿₊୨୧₊‿︵‧ ˚ ₊⊹
+
+## 🛠️ Endpoints de la API
+
+### Auth
+- **POST /api/auth/register**  
+- **POST /api/auth/login**
+
+### Workspace
+- **POST /api/workspace/** - Crear workspace
+- **GET /api/workspace/:workspace_id** - Obtener info de workspace
+- **POST /api/workspace/:workspace_id/members** - Invitar miembro
+- **GET /api/workspace/:workspace_id/members/accept-invitation** - Aceptar invitación
+
+### Channels
+- **POST /api/workspace/:workspace_id/channels** - Crear canal
+- **GET /api/workspace/:workspace_id/channels** - Listar canales
+
+### Messages
+- **POST /api/workspace/:workspace_id/channels/:channel_id/messages** - Crear mensaje
+- **DELETE /api/workspace/:workspace_id/channels/:channel_id/messages/:message_id** - Eliminar mensaje
 
 ⊹₊ ˚‧︵‿₊୨୧₊‿︵‧ ˚ ₊⊹
 
