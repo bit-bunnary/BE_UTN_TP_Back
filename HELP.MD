@@ -8,68 +8,81 @@ import ServerError from "../Helpers/error.helpers.js"
 class AuthController {
     async register (request, response){
         try {
+
+            console.log("1 - Entró al register")
+
             const { email, password, username } = request.body
             if (!email || !password || !username) {
                 throw new ServerError('Error: Nombre, Email o Usuario inválido', 400)
             }
 
-            const emailNormalized = email.toLowerCase().trim()/* FIXME:?? tuve que agregar esto porlas Compass registre mal un email*/
+            const emailNormalized = email.toLowerCase().trim()
 
             const user = await userRepository.buscarUnoPorEmail(emailNormalized)
             if (user) {
                 throw new ServerError('El email ya está registado', 400)
             }
-            
-            let hashed_password = await bcrypt.hash(password, 10)     
+
+            let hashed_password = await bcrypt.hash(password, 10)
+            console.log("2 - Password hasheada")
 
             await userRepository.crear({
-                username: username,
-                email: emailNormalized,
+                username,
+                email,
                 password: hashed_password
             })
 
+            console.log("3 - Usuario creado en DB")
 
-            const verification_email_token = jwt.sign({
-                    email: email /* guarda el email del usuario q se registra */
-                },
-                ENVIRONMENT.JWT_SECRET_KEY,
-                /* {
-                    expiresIn: '3d'
-                } */
+            const verification_email_token = jwt.sign(
+                { email: email },
+                ENVIRONMENT.JWT_SECRET_KEY
             )
 
-            const info = await mailTransporter.sendMail(
-                {
+            console.log("4 - Token generado")
+            console.log("ANTES DE ENVIAR MAIL")
+
+            try {
+                const info = await mailTransporter.sendMail({
                     from: ENVIRONMENT.GMAIL_USER,
                     to: emailNormalized,
                     subject: 'Verifica tu Email 💌',
                     html: 
                     `
-                    <h1>👋 Bienvenidx ${username}</h1>
-                    <p>📣 Es obligatorio que verifiques tu email</p>
-                    <p>
+                        <h1>👋 Bienvenidx ${username}</h1>
+                        <p>📣 Es obligatorio que verifiques tu email</p>
+                        <p>
                             Haz click en 
-                                <a href="https://be-utn-tp-back.vercel.app/api/auth/verify-email?verification_email_token=${verification_email_token}">
+                                <a href="${ENVIRONMENT.URL_BACKEND}/api/auth/verify-email?verification_email_token=${verification_email_token}">
                                     "Verificar"
                                 </a> 
                             para confirmar tu correo electrónico.
                         </p>
-                    <br>
-                    <span>Si no fuiste tú quien generó este registro, es posible que otra persona esté usando tu cuenta. Revisa y protege tu cuenta ahora.</span>
+                        <br>
+                        <span>Si no fuiste tú quien generó este registro, es posible que otra persona esté usando tu cuenta. Revisa y protege tu cuenta ahora.</span>
                     `
-                }
-            )
-            console.log("respuesta de", info)
-                return response.json({
-                    message: 'Usuario creado exitosamente! (￣▽￣)',
-                    ok: true,
-                    status: 201,
-                    data: null
                 })
-            } 
-        
-        catch (error) {
-            console.error("DETALLE DEL ERROR:", error);
+
+                console.log("5 - MAIL ENVIADO OK")
+                console.log(info)
+
+            } catch (error) {
+                console.log("ERROR EN SENDMAIL:", error.code, error.response, error.message);
+            }
+
+            console.log("DESPUÉS DE ENVIAR MAIL")
+
+            return response.json({
+                message: 'Usuario creado exitosamente! (￣▽￣)',
+                ok: true,
+                status: 201,
+                data: null
+            })
+
+        } catch (error) {
+
+            console.log("ERROR GENERAL:", error) // 👈 MUY IMPORTANTE
+
             if (error.status) {
                 return response.json({
                     message: error.message,
@@ -78,6 +91,7 @@ class AuthController {
                     data: null
                 })
             }
+
             return response.json({
                 message: 'Error interno del servidor',
                 ok: false,

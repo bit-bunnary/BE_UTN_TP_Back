@@ -8,7 +8,7 @@ const mailTransporter = nodemailer.createTransport({
         pass: ENVIRONMENT.GMAIL_PASS
     },
     tls: {
-        rejectUnauthorized: false /* permite certificados autofirmados en dev FIXME: Esto no tendría que quedar así en teoría */
+        rejectUnauthorized: false
     }
 })
 
