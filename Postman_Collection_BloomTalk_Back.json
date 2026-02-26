@@ -1,0 +1,149 @@
+{
+  "info": {
+    "_postman_id": "26a3623d-2b7c-4238-a7f2-a1edecd81d0b",
+    "name": "API-1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50913074"
+  },
+  "item": [
+    {
+      "name": "api/auth",
+      "item": [
+        {
+          "name": "Registro",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Verify Email",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "api/workspaces",
+      "item": [
+        {
+          "name": "/:workspace_id",
+          "item": [
+            {
+              "name": "/members",
+              "item": [
+                {
+                  "name": "Request Add Member",
+                  "request": {
+                    "method": "GET",
+                    "header": []
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Obtener por ID (membership)",
+                  "request": {
+                    "method": "GET",
+                    "header": []
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "/channels",
+              "item": [
+                {
+                  "name": "/:channel_id",
+                  "item": [
+                    {
+                      "name": "/messages",
+                      "item": [
+                        {
+                          "name": "Create Message",
+                          "request": {
+                            "method": "GET",
+                            "header": []
+                          },
+                          "response": []
+                        },
+                        {
+                          "name": "Get Messages",
+                          "request": {
+                            "method": "GET",
+                            "header": []
+                          },
+                          "response": []
+                        },
+                        {
+                          "name": "Delete Message",
+                          "request": {
+                            "method": "GET",
+                            "header": []
+                          },
+                          "response": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Create Channel",
+                  "request": {
+                    "method": "GET",
+                    "header": []
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Get Channels",
+                  "request": {
+                    "method": "GET",
+                    "header": []
+                  },
+                  "response": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Obtener Workspaces",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Crear Workspace",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
