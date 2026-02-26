@@ -33,9 +33,9 @@ class AuthController {
                     email: email /* guarda el email del usuario q se registra */
                 },
                 ENVIRONMENT.JWT_SECRET_KEY,
-                /* {
-                    expiresIn: '3d'
-                } */
+                {
+                    expiresIn: "1d"
+                }
             )
 
             const info = await mailTransporter.sendMail(

@@ -134,7 +134,10 @@ class WorkspaceController {
                     workspace: workspace._id,
                     role
                 },
-                ENVIRONMENT.JWT_SECRET_KEY
+                ENVIRONMENT.JWT_SECRET_KEY,
+                {
+                    expiresIn: "1d"
+                }
             )
 
             mailTransporter.sendMail(
