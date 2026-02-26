@@ -42,7 +42,7 @@ class AuthController {
                 {
                     from: ENVIRONMENT.GMAIL_USER,
                     to: emailNormalized,
-                    subject: 'Verifica tu Email 💌',
+                    subject: 'Verifica tu Email 💌🌸',
                     html: 
                     `
                     <h1>👋 Bienvenidx ${username}</h1>

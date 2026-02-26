@@ -141,7 +141,7 @@ class WorkspaceController {
                 {
                     to: email,
                     from: ENVIRONMENT.GMAIL_USER,
-                    subject: `Invitación a ${workspace.title}`,
+                    subject: `Invitación a ${workspace.title} 🖥️🌸`,
                     html: `
                         <h1>Has sido invitado a participar del espacio de trabajo: ${workspace.title} </h1>
                         <p>Si no reconoces esta invitación, desestima este mail</p>
