@@ -140,7 +140,7 @@ class WorkspaceController {
                 }
             )
 
-            mailTransporter.sendMail(
+            await mailTransporter.sendMail(
                 {
                     to: email,
                     from: ENVIRONMENT.GMAIL_USER,
