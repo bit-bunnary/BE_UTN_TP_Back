@@ -202,7 +202,7 @@ class WorkspaceController {
                 })
             }
             return response.json({
-                message: 'Error interno del servidor',
+                message: 'Error interno del servidor 2',
                 ok: false,
                 status: 500,
                 data: null
