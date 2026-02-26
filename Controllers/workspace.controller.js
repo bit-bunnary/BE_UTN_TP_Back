@@ -184,9 +184,9 @@ class WorkspaceController {
         try {
             const {invitation_token} = request.query
             const payload = jwt.verify(invitation_token, ENVIRONMENT.JWT_SECRET_KEY)
-            const {id, workspace: workspace_id, role} = payload
-            console.log(invitation_token, payload)
-            await workspaceRepository.addMember(workspace_id, id, role)
+            const {id, workspace, role} = payload
+            
+            await workspaceRepository.addMember(workspace, id, role)
 
             response.redirect(`${ENVIRONMENT.URL_FRONTEND}/`)
         }

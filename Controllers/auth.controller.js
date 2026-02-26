@@ -49,7 +49,7 @@ class AuthController {
                     <p>📣 Es obligatorio que verifiques tu email</p>
                     <p>
                             Haz click en 
-                                <a href="https://be-utn-tp-back.vercel.app/api/auth/verify-email?verification_email_token=${verification_email_token}">
+                                <a href="${ENVIRONMENT.URL_BACKEND}/api/auth/verify-email?verification_email_token=${verification_email_token}">
                                     "Verificar"
                                 </a> 
                             para confirmar tu correo electrónico.
